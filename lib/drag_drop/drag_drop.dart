@@ -16,6 +16,10 @@ class _DragandDropState extends State<DragandDrop> {
     'heat': 'If you ___1___ water to a temperature of',
     'cool': 'if you ___2___ water to a temperature of',
   };
+  final Map answer = {
+    'heat': 'If you heat water to a temperature of',
+    'cool': 'if you cool water to a temperature of',
+  };
   int refresh = 0;
 
   @override
@@ -72,9 +76,18 @@ class _DragandDropState extends State<DragandDrop> {
     return DragTarget<String>(
       builder: (BuildContext context, List<String?> incoming, List rejected) {
         if (score[words] == true) {
-          return Text("${choices[words]} + $words");
+          //return Text("${choices[words]} + $words");
+          return Text(
+            'If you $words water to a temperature of',
+            style: TextStyle(fontSize: 18),
+          );
         } else {
-          return SizedBox(height: 25, child: Text(choices[words]));
+          return SizedBox(
+              height: 25,
+              child: Text(
+                choices[words],
+                style: TextStyle(fontSize: 18),
+              ));
         }
       },
       onWillAccept: (data) => data == words,
