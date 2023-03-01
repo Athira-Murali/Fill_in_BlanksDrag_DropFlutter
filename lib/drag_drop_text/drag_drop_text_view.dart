@@ -16,6 +16,8 @@ class _TextDragandDropState extends State<TextDragandDrop> {
 
   final List<Climate> climates = [];
 
+  bool _isDropped = false;
+
   int count = 0;
 
   void removeAll(Climate toRemove) {
@@ -24,6 +26,7 @@ class _TextDragandDropState extends State<TextDragandDrop> {
     winter.removeWhere((climate) => climate.name == toRemove.name);
   }
 
+  @override
   void initState() {
     super.initState();
     SystemChrome.setPreferredOrientations([
@@ -81,6 +84,7 @@ class _TextDragandDropState extends State<TextDragandDrop> {
                     onAccept: (data) => setState(() {
                       removeAll(data);
                       winter.add(data);
+                      print(data.type);
                     }),
                   ),
                 ],
@@ -107,22 +111,6 @@ class _TextDragandDropState extends State<TextDragandDrop> {
                       },
                     ),
                   )),
-              // Expanded(
-              //   flex: 3,
-              //   child: Padding(
-              //     padding: const EdgeInsets.symmetric(vertical: 35),
-              //     child: buildTarget(
-              //       context,
-              //       climates: all,
-              //       acceptTypes: ClimateType.values,
-              //       onAccept: (data) => setState(() {
-              //         removeAll(data);
-              //         all.add(data);
-              //       }),
-              //     ),
-              //   ),
-              // ),
-
               Align(
                 alignment: Alignment.bottomRight,
                 child: buildButton(context, acceptTypes: ClimateType.values),
@@ -141,17 +129,43 @@ class _TextDragandDropState extends State<TextDragandDrop> {
   }) {
     return GestureDetector(
         onTap: () {
+          var one = false;
+          var two = false;
+          print("...............summer...........${summer.toString()}");
+          print("...............winter...........${winter.toString()}");
+
+          for (int i = 0; i < summer.length; i++) {
+            if (summer[i].type == ClimateType.summer) {
+              one = true;
+            } else {
+              one = false;
+            }
+          }
+          for (int i = 0; i < winter.length; i++) {
+            if (winter[i].type == ClimateType.winter) {
+              two = true;
+            } else {
+              two = false;
+            }
+          }
+          if (one && two && (all.isEmpty)) {
+            debugPrint("sucess");
+          } else if (all.isNotEmpty) {
+            debugPrint('incomplete');
+          } else {
+            debugPrint("failure");
+          }
           // if (summer.contains(ClimateType.summer)) {
           //   debugPrint("correct data");
           // } else {
           //   debugPrint("Wrong data");
           // }
 
-          if (acceptTypes.contains(Climate().type)) {
-            debugPrint("*************Correct************");
-          } else {
-            debugPrint("#### Wrong data#####");
-          }
+          // if (acceptTypes.contains(Climate().type)) {
+          //   debugPrint("*************Correct************");
+          // } else {
+          //   debugPrint("#### Wrong data#####");
+          // }
 
           //**********count************
 
@@ -218,12 +232,16 @@ class _TextDragandDropState extends State<TextDragandDrop> {
           if (acceptTypes.contains(data.type)) {
             debugPrint("correct");
             setState(() {
+              _isDropped = true;
               count++;
             });
           } else {
             debugPrint("wrong");
           }
           onAccept(data);
+        },
+        onLeave: (data) {
+          print('Missed');
         },
       ),
     );
@@ -244,30 +262,30 @@ class ClimateDraggableWidgets extends StatefulWidget {
 }
 
 class _ClimateDraggableWidgetsState extends State<ClimateDraggableWidgets> {
+  bool _isDropped = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       child: Draggable<Climate>(
         data: widget.climate,
-        child: buildText(context),
         feedback: buildText(context),
         childWhenDragging: Container(height: 20),
-        // onDragStarted: () {
-        //   setState(() {
-        //     _dragging = true;
-        //   });
-        // },
-        // onDragCompleted: () {
-        //   setState(() {
-        //     _dragging = false;
-        //   });
-        //   print('Drag completed!');
-        // },
-        // onDragEnd: (details) {
-        //   setState(() {
-        //     _dragging = false;
-        //   });
-        // },
+        onDragStarted: () {
+          setState(() {
+            _isDropped = true;
+          });
+        },
+        onDragCompleted: () {
+          setState(() {
+            _isDropped = false;
+          });
+        },
+        onDragEnd: (details) {
+          setState(() {
+            _isDropped = false;
+          });
+        },
+        child: buildText(context),
       ),
     );
   }
