@@ -1,15 +1,6 @@
-import 'package:fill_in_blanks/Drag_drop_animal/view/drag_drop_animal.dart';
-import 'package:fill_in_blanks/chateGpt/chate_fill.dart';
-import 'package:fill_in_blanks/chateGpt/chatgpt.dart';
-import 'package:fill_in_blanks/color/colorGame.dart';
-import 'package:fill_in_blanks/drag_drop/drag_drop.dart';
-// import 'package:fill_in_blanks/drag_drop/drag_drop.dart';
-import 'package:fill_in_blanks/fill_in_blanks.dart';
+import 'package:fill_in_blanks/drag_drop_text/drag_drop_text_view.dart';
 
 import 'package:flutter/material.dart';
-
-import 'DragDrop_rich/drag_drop_view.dart';
-import 'chateGpt/drag_drop3.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,16 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-
-      //home: FillTheBlanks1(),
-      //home: FillInTheBlanks2(),
-      home: const DragandDrop(),
-      //home: const FillTheBlanksAnimal(),
-      //home: DragDropView(),
-      //home: const FillTheBlanks(),
-      //home: QuizPage(),
-      //home: const Colorgame(),
-      //home: const FillTheBlanks(),
+      home: const TextDragandDrop(),
     );
   }
 }

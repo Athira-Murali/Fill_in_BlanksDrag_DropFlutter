@@ -76,11 +76,11 @@ class _DragandDropState extends State<DragandDrop> {
     return DragTarget<String>(
       builder: (BuildContext context, List<String?> incoming, List rejected) {
         if (score[words] == true) {
-          //return Text("${choices[words]} + $words");
-          return Text(
-            'If you $words water to a temperature of',
-            style: TextStyle(fontSize: 18),
-          );
+          return Text("${choices[words]} + $words");
+          // return Text(
+          //   'If you $words water to a temperature of',
+          //   style: TextStyle(fontSize: 18),
+          // );
         } else {
           return SizedBox(
               height: 25,
