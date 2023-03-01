@@ -86,7 +86,7 @@ class _DragandDropState extends State<DragandDrop> {
               height: 25,
               child: Text(
                 choices[words],
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ));
         }
       },

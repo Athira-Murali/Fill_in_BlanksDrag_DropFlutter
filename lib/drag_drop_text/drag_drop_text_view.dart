@@ -83,32 +83,6 @@ class _TextDragandDropState extends State<TextDragandDrop> {
                       winter.add(data);
                     }),
                   ),
-
-                  // Container(
-                  //   color: const Color.fromARGB(255, 238, 220, 166),
-                  //   height: 250,
-                  //   width: 200,
-                  //   child: DragTarget<Climate>(
-                  //     builder: (context, candidateData, rejectedData) =>
-                  //         GridView(
-                  //             gridDelegate:
-                  //                 SliverGridDelegateWithFixedCrossAxisCount(
-                  //                     crossAxisCount: 2,
-                  //                     mainAxisSpacing: 2,
-                  //                     crossAxisSpacing: 1,
-                  //                     childAspectRatio: 2.1),
-                  //             children: [
-                  //           ...climates
-                  //               .map(
-                  //                 (climate) =>
-                  //                     ClimateDraggableWidgets(climate: climate),
-                  //               )
-                  //               .toList()
-                  //         ]),
-                  //     onWillAccept: (data) => true,
-                  //     onAccept: (data) {},
-                  //   ),
-                  // ),
                 ],
               ),
               const SizedBox(
@@ -176,7 +150,7 @@ class _TextDragandDropState extends State<TextDragandDrop> {
           if (acceptTypes.contains(Climate().type)) {
             debugPrint("*************Correct************");
           } else {
-            debugPrint("#### Wrong data  #####");
+            debugPrint("#### Wrong data#####");
           }
 
           //**********count************
